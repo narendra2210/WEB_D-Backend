@@ -12,6 +12,9 @@ app.use(express.static(path.join(__dirname , 'public')));
 //middleware To get the form data by Post using url-encoded
 app.use(express.urlencoded({extended:true}));
 
+//middleware To get the json data by Post using 
+app.use(express.json());
+
 app.get('/' , (req , res)=>{
     res.render('index');
 })
