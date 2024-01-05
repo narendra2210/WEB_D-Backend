@@ -66,6 +66,14 @@ app.get('/blogs/:id' , (req,res)=>{
     res.render('show' , {foundComment});
 })
 
+//Task-5 to get the form for editing the blog
+app.get('/blogs/:id/edit' ,(req,res)=>{
+    let {id} = req.params;
+    let foundComment = comments.find(Comment => Comment.id == id);
+    //console.log(foundComment);
+    res.render('edit' , {foundComment});
+})
+
 app.listen(8080 , ()=>{
     console.log("Server connected at 8080");
 })
