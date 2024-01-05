@@ -1,0 +1,39 @@
+h1{
+    text-align: center;
+    text-decoration: lightseagreen;
+}
+
+h2{
+    text-align: center;
+    font-weight: 800;
+}
+
+h3{
+    text-align: center;
+    font-family: cursive;
+    color: rgb(225, 41, 225);
+    font-weight: 800;
+}
+a{
+    color: rgb(246, 244, 242);
+    font-weight: 800;
+    border: 3px solid rgb(230, 18, 18);
+    background-color: rgb(228, 12, 12);
+    text-decoration: none;
+}
+
+div{
+    text-align: center;
+    width: 300px;
+    height: 250px;
+    background-color: rgb(221, 234, 234);
+    cursor: pointer;
+}
+
+section{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 20px;
+}
