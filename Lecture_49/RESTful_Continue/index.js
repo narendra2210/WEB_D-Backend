@@ -43,7 +43,7 @@ app.use(express.urlencoded({extended:true}));//for form endcoded data
 app.use(methodOverride('_method'));//overriding for post to patch
 
 app.get('/' , (req,res)=>{
-    res.send("Root path pe aapka swagat h");
+    res.send(`<h1>   Root path pe aapka swagat h   </h1>`);
 })
 
 // Tastk - 1 Display all the blogs
