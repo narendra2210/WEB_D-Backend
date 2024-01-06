@@ -2,28 +2,34 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const methodOverride = require('method-override');
+const {v4 : uuid} = require('uuid');
+
 
 
 
 //dummy array instead of DB
 let comments = [
     {
-        id:0,
+        //id:0,
+        id:uuid(),//returns id that is string
         username:"Monu",
         Comment:"kuch nhi"
     },
     {
-        id:1,
+        //id:1,
+        id:uuid(),
         username:"Thakur",
         Comment:"Ab tu gya"
     },
     {
-        id:2,
+        //id:2,
+        id:uuid(),
         username:"Raghav",
         Comment:"polls aa gyi pols"
     },
     {
-        id:3,
+        //id:3,
+        id:uuid(),
         username:"Rajput",
         Comment:"Sher hi khade"
     }
@@ -55,7 +61,8 @@ app.post('/blogs' , (req,res)=>{
     // console.log(req.body);
     // res.send("Chal gya");
     let {username , Comment} = req.body;
-    comments.push({username , Comment , id:comments.length});
+    // comments.push({username , Comment , id:comments.length});
+    comments.push({username , Comment , id:uuid()});
     res.redirect('/blogs');
 })
 
