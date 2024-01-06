@@ -14,12 +14,13 @@ h3{
     color: rgb(225, 41, 225);
     font-weight: 800;
 }
-a{
+a , button{
     color: rgb(246, 244, 242);
     font-weight: 800;
     border: 3px solid rgb(230, 18, 18);
     background-color: rgb(228, 12, 12);
     text-decoration: none;
+    border-radius: 5px;
 }
 
 div{

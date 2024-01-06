@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 const path = require('path');
+const methodOverride = require('method-override');
+
 
 
 //dummy array instead of DB
@@ -32,6 +34,7 @@ app.set('views' , path.join(__dirname , 'views'));
 
 app.use(express.static(path.join(__dirname , 'public')));
 app.use(express.urlencoded({extended:true}));//for form endcoded data
+app.use(methodOverride('_method'));//overriding for post to patch
 
 app.get('/' , (req,res)=>{
     res.send("Root path pe aapka swagat h");
@@ -66,12 +69,31 @@ app.get('/blogs/:id' , (req,res)=>{
     res.render('show' , {foundComment});
 })
 
-//Task-5 to get the form for editing the blog
+//Task-5 To get the form for editing the blog
 app.get('/blogs/:id/edit' ,(req,res)=>{
     let {id} = req.params;
     let foundComment = comments.find(Comment => Comment.id == id);
     //console.log(foundComment);
     res.render('edit' , {foundComment});
+})
+
+//Task-6 Actually editing the blog using patch and not put
+app.patch('/blogs/:id' , (req,res)=>{
+    let {id} = req.params;
+    let foundComment = comments.find(Comment => Comment.id == id);
+    // console.log(req.body);
+    let {Comment} = req.body;
+    foundComment.Comment = Comment;//changing old comment to new
+    //res.send('Patch request sent');
+    res.redirect('/blogs');
+})
+
+//Task-7 To delete a blog from DB
+app.delete('/blogs/:id' , (req,res)=>{
+    let {id} = req.params;
+    let newArray = comments.filter((Comment)=>{return Comment.id != id});
+    comments = newArray;
+    res.redirect('/blogs');
 })
 
 app.listen(8080 , ()=>{

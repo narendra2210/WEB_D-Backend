@@ -8,14 +8,14 @@
 <body>
     <fieldset>
         <legend>Form for Editing a blog</legend>
-        <form action="/" method="POST">
+        <form action="/blogs/<%= foundComment.id %>?_method=PATCH" method="POST">
     
             <label for="Comment">Comment: </label>
-            <input type="text" name="Comment" id="Comment">
+            <input type="text" name="Comment" id="Comment" value="<%= foundComment.Comment %>">
     
             <br>
             
-            <button type="submit">Edit</button>
+            <button type="submit">Edit Comment</button>
     
         </form>
     </fieldset>
