@@ -38,7 +38,7 @@ const products = [
     },
     {
         name : "Wrist Watch",
-        img : "https://images.unsplash.com/photo-1622434641406-a158123450f9?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fHdhdGNofGVufDB8fDB8fHww",
+        img : "https://images.unsplash.com/photo-1511370235399-1802cae1d32f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fHdhdGNofGVufDB8fDB8fHww",
         price : 29999,
         desc : "Fossil"
     }
