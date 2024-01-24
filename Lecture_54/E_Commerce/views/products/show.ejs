@@ -1,9 +1,23 @@
 <% layout('layouts/boilerplate') %>
 
 <%- include('../partails/navbar') %>
+
+<!-- Displaying local file of flash -->
+<%- include('../partails/flash') %>
+
+
     <div class="row">
 
+        <!-- No need of it as we have included above flash.ejs -->
+        <!-- Displaying flash mssg -->
+        <!--  if(msg && msg.length){ %>
+            <div class="alert alert-success" role="alert">
+                <strong> msg </strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+         }  -->
             <div class="col-lg-6 mt-3">
+
                 <div class="card shadow mx-auto"  style="width: 18rem;">
                     <img src="<%= foundProduct.img %>" class="card-img-top" alt="...">
                      <div class="card-body">

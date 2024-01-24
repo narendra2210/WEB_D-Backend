@@ -23,6 +23,9 @@ router.post('/products/:id/review' , validateReview , async(req , res)=>{
         await review.save();
         await product.save();
         
+        // giving flash mssg and then it redirect to show 
+        req.flash('success' , 'Review added Succesfully');
+
         res.redirect(`/products/${id}`);
     }
     catch(e){
