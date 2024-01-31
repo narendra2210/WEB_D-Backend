@@ -2,9 +2,9 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const mongoose = require('mongoose');
-const seedDB = require('./seed');
+const seedDB = require('./seed')
 const ejsMate = require('ejs-mate');
-const methodOverride = require('method-override');
+const methodOverride = require('method-override')
 const flash = require('connect-flash');
 const session = require('express-session');
 
@@ -14,45 +14,49 @@ const LocalStrategy = require('passport-local');
 const User = require('./models/User');
 
 
+const productRoutes = require('./routes/product')
+const reviewRoutes = require('./routes/review')
+const authRoutes = require('./routes/auth')
+//const cartRoutes = require('./routes/cart')
 
-const productRoutes = require('./routes/product');
-const reviewRoutes = require('./routes/review');
-const authRoutes = require('./routes/auth');
 
 
-mongoose.connect('mongodb://127.0.0.1:27017/shopping-monu-app')
+mongoose.connect('mongodb://127.0.0.1:27017/shopping-sam-app')
 .then(()=>{
-    console.log('DB Connected');
+    console.log("DB connected successfully")
 })
 .catch((err)=>{
-    console.log('DB not connected');
-    console.log(err);
+    console.log("DB error"); 
+    console.log(err)
 })
+
 
 // Session middleware
 let configSession = {
     secret: 'keyboard cat',
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: true , 
     cookie: { 
-        httpOnly : true,
-        maxAge : 7*24*60*60*1000,   // session for 7 days
-        expires : date.now() + 7*24*60*60*1000
+        httpOnly: true ,
+        expires: Date.now() + 24*7*60*60*1000 , 
+        maxAge:24*7*60*60*1000
     }
 }
 
-app.engine( 'ejs', ejsMate);
+app.engine('ejs' , ejsMate);
 app.set('view engine' , 'ejs');
-app.set('views' , path.join(__dirname , 'views'));
-app.use(express.static(path.join(__dirname , 'public')));
-app.use(express.urlencoded({extended : true}));
+app.set('views' , path.join(__dirname , 'views')); // views folder 
+app.use(express.static(path.join(__dirname , 'public'))); // public folder
+app.use(express.urlencoded({extended:true}));
 app.use(methodOverride('_method'));
-app.use(session(configSession));   // session middleware
-app.use(flash());                  // flash middleware
+app.use(session(configSession));     // session middleware
+app.use(flash());                    // flash middleware
+
 
 // passport initialize
 app.use(passport.initialize());
 app.use(passport.session());
+
 
 //use static serialize and deserialize of model for passport session support
 passport.serializeUser(User.serializeUser());
@@ -67,26 +71,19 @@ app.use((req,res,next)=>{
     next();
 })
 
-
 // use static authenticate method of model in LocalStrategy
 passport.use(new LocalStrategy(User.authenticate()));
 
+// seeding database
+// seedDB()
 
-
-// Seeding database
-//seedDB();
-
-//Har incoming request ke liye path check kiya jaye
-app.use(productRoutes);
-
-//Har incoming request ke liye path check kiya jaye
-app.use(reviewRoutes);
-
-//Har incoming request ke liye path check kiya jaye
-app.use(authRoutes);
+app.use(productRoutes); //so that harr incoming request ke liye path check kiya jaae
+app.use(reviewRoutes);  //so that harr incoming request ke liye path check kiya jaae
+app.use(authRoutes);  //so that harr incoming request ke liye path check kiya jaae
+//app.use(cartRoutes);  //so that harr incoming request ke liye path check kiya jaae
 
 
 
 app.listen(8080 , ()=>{
-    console.log("Server connected at port 8080");
+    console.log("server connected at port 8080")
 })

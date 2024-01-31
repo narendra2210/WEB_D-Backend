@@ -3,31 +3,35 @@ const Review = require('./Review');
 
 // Schema bna diya
 const productSchema = new mongoose.Schema({
-    name : {
-        type : String,
-        trim : true , 
-        required : true
-    },
-    img : {
-        type : String,
-        trim : true 
+    name: {
+        type:String,
+        trim:true,
+        required:true
+    } , 
+    img:{
+        type:String,
+        trim:true
         // default : 
+    } ,
+    price: {
+        type:Number,
+        // min:0,
+        required:true
+    } ,
+    desc: {
+        type:String,
+        trim:true
     },
-    price : {
-        type : Number,
-        //min : 0,
-        required : true
-    },
-    desc : {
-        type : String ,
-        trim : true
-    },
-    reviews : [
+    reviews:[
         {
-            type : mongoose.Schema.Types.ObjectId , 
-            ref : 'Review'
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Review'
         }
-    ]
+    ] , 
+    author:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    }
 })
 
 // Middleware jo BTS mongoDB operations karwane par use hota h 
@@ -43,6 +47,7 @@ const productSchema = new mongoose.Schema({
 
 // product m id catch ho rahi h
 
+
 productSchema.post('findOneAndDelete' , async function(product){
     if(product.reviews.length > 0){
         await Review.deleteMany({_id:{$in:product.reviews}})
@@ -52,6 +57,7 @@ productSchema.post('findOneAndDelete' , async function(product){
 
 //model bna diya ab use krlo
 let Product = mongoose.model('Product' , productSchema);
+
 
 //Model export kr diya h ab import kr skte h
 module.exports = Product;

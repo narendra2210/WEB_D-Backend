@@ -1,22 +1,27 @@
 <% layout('layouts/boilerplate') %>
 
-
+    
 <div class="row">
+
     <div class="col-md-6 mx-auto">
-        <!-- Displaying local file of flash -->
-        <%- include('../partails/flash') %>
-        <h1 class="display-6 mt-3">Login</h1>
+        <%- include('../partials/flash') %> 
+        <h1 class="display-6">Login</h1>
         <form action="/login" method="POST">
-            <div>
-                <label class="form-label mt-3" for="username">Username : </label>
-                <input class="form-control mt-1" type="text" name="username" id="username" placeholder="Username">
+
+            <div class="mb-3">
+                <label class="form-label" for="username"> Username: </label>
+                <input class="form-control" type="text" name="username" id="username" placeholder="Username">
             </div>
-            <div>
-                <label class="form-label mt-3" for="password">Password : </label>
-                <input class="form-control mt-1" type="password" name="password" id="password" placeholder="Password">
+
+
+            <div class="mb-3">
+                <label class="form-label" for="password"> Password: </label>
+                <input class="form-control" type="password" name="password" id="password" placeholder="Password">
             </div>
-            <button class="btn btn-sm btn-success mt-3" type="submit">Login</button>
-            <p class="fw-light mt-2">Don't have an account <a href="/register">Sign up</a></p>
+            <button type="submit" class="btn btn-sm btn-success">Login</button>
+            <p class="fw-light mt-2"> Dont have an account ,<a href="/register">Signup</a> </p>
         </form>
+
     </div>
+
 </div>
