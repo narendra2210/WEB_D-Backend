@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 const Person = (props) => {
-  let namee = props.name;
+  let [namee , setNamee] = useState(props.name);
   function handleClick(){
-    namee = "anonymous";
+    // namee = "anonymous";
     // console.log("Clicked");
-    console.log(namee);
+    // console.log(namee);
+    setNamee('anonymous');
   }
   return (
     <div>
