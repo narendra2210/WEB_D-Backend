@@ -1,8 +1,9 @@
 import React from 'react'
+import TodoApp from './Components/TodoApp'
 
 const App = () => {
   return (
-    <div>App</div>
+    <TodoApp />
   )
 }
 

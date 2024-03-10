@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import TodoList from './TodoList'
+import Form from './Form';
 
 const TodoApp = () => {
     let arrayDummy = [
@@ -21,8 +22,19 @@ const TodoApp = () => {
         }
     ]
 
+    let [todos , setTodos] = useState(arrayDummy);
+
+    const addTodo = (todo) =>{
+        // spread operator is used here to join arraydummy and newTodo
+        setTodos([...todos , todo])
+    }
+
   return (
-    <TodoList todos={arrayDummy} />
+    <div>
+        {/* <TodoList todos={arrayDummy} /> */}
+        <Form addTodo={addTodo} todos={todos}/>
+        <TodoList todos={todos} />
+    </div>
   )
 }
 
