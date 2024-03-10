@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { v4 as uuid } from 'uuid';
 
 const Form = (props) => {
     let [input , setInput] = useState('');
@@ -12,7 +13,7 @@ const Form = (props) => {
         e.preventDefault();
 
         const newTodo = {
-            id : props.todos.length,
+            id : uuid(),
             todo : input
         }
 
@@ -23,9 +24,9 @@ const Form = (props) => {
 
 
   return (
-    <Form onSubmit={formSubmitHandler} >
+    <form onSubmit={formSubmitHandler} >
         <input onChange={inputChangeHandler} type='text' placeholder='Enter your task' value={input} />
-    </Form>
+    </form>
   )
 }
 

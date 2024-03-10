@@ -1,23 +1,24 @@
 import React, { useState } from 'react'
 import TodoList from './TodoList'
 import Form from './Form';
+import { v4 as uuid } from 'uuid';
 
 const TodoApp = () => {
     let arrayDummy = [
         {
-            id : 0,
+            id : uuid(),
             todo : "Moj kar"
         },
         {
-            id : 1,
+            id : uuid(),
             todo : "Video upload"
         },
         {
-            id : 2,
+            id : uuid(),
             todo : "practice kro"
         },
         {
-            id : 3,
+            id : uuid(),
             todo : "code push krdo"
         }
     ]
@@ -29,11 +30,17 @@ const TodoApp = () => {
         setTodos([...todos , todo])
     }
 
+    const deleteTodo = (id)=>{
+        const newTodo = todos.filter((todo) => todo.id !== id);
+        setTodos(newTodo);
+    }
+
   return (
     <div>
         {/* <TodoList todos={arrayDummy} /> */}
-        <Form addTodo={addTodo} todos={todos}/>
-        <TodoList todos={todos} />
+        <h1 style={{textAlign:'center'}}>Todo list for Thakur Narendra Singh</h1>
+        <Form  todos={todos} addTodo={addTodo} />
+        <TodoList todos={todos} deleteTodo={deleteTodo}/>
     </div>
   )
 }
