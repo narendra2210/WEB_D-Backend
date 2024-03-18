@@ -1,46 +1,72 @@
-import React, { useState } from 'react'
-import TodoList from './TodoList'
+import React , {useEffect, useState} from 'react';
 import Form from './Form';
-import { v4 as uuid } from 'uuid';
+import TodoList from './TodoList';
+// import { v4 as uuid } from 'uuid';
 
 const TodoApp = () => {
-    let arrayDummy = [
-        {
-            id : uuid(),
-            todo : "Moj kar"
-        },
-        {
-            id : uuid(),
-            todo : "Video upload"
-        },
-        {
-            id : uuid(),
-            todo : "practice kro"
-        },
-        {
-            id : uuid(),
-            todo : "code push krdo"
-        }
-    ]
+    // let arrayDummy = [
+    //     {
+    //         id : uuid(),
+    //         todo : "Moj kar"
+    //     },
+    //     {
+    //         id : uuid(),
+    //         todo : "Video upload"
+    //     },
+    //     {
+    //         id : uuid(),
+    //         todo : "practice kro"
+    //     },
+    //     {
+    //         id : uuid(),
+    //         todo : "code push krdo"
+    //     }
+    // ]
 
-    let [todos , setTodos] = useState(arrayDummy);
+  const arrayDummy = JSON.parse(localStorage.getItem('todos') || "[]");
 
-    const addTodo = (todo) =>{
-        // spread operator is used here to join arraydummy and newTodo
-        setTodos([...todos , todo])
-    }
+  const [todos , setTodos] = useState(arrayDummy);
 
-    const deleteTodo = (id)=>{
-        const newTodo = todos.filter((todo) => todo.id !== id);
-        setTodos(newTodo);
-    }
+
+  const addTodo = (todo)=>{
+    // spread operator is used here to join arraydummy and newTodo
+    setTodos([...todos , todo])
+  }
+
+  // console.log("inside the App component");
+
+  useEffect(()=>{
+    localStorage.setItem('todos' , JSON.stringify(todos));
+    // console.log("inside useEffect hook")
+  },[todos])
+
+  // const deleteTodo = (id)=>{
+  //   const newTodos = todos.filter((todo)=>todo.id !== id);
+  //   setTodos(newTodos);
+  // }
+  // a better way is shown below
+  const deleteTodo = (id)=>{
+    setTodos((prevState)=>{
+      return prevState.filter((todo)=>todo.id !== id)
+    })
+  }
+
+  const checkTodo = (id)=>{
+    setTodos((prevState)=>{
+      return prevState.map((item)=>item.id === id ? {...item,checked: !item.checked} : item);
+    })
+
+  }
+
+
 
   return (
     <div>
         {/* <TodoList todos={arrayDummy} /> */}
-        <h1 style={{textAlign:'center'}}>Todo list for Thakur Narendra Singh</h1>
-        <Form  todos={todos} addTodo={addTodo} />
-        <TodoList todos={todos} deleteTodo={deleteTodo}/>
+      <h1 style={{textAlign:'center'}} >Todo List for Samarth</h1>
+
+        <Form addTodo={addTodo} todos={todos}  />
+        <TodoList todos={todos} deleteTodo={deleteTodo} checkTodo={checkTodo} />
     </div>
   )
 }

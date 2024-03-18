@@ -1,31 +1,41 @@
 import React, { useState } from 'react'
-import { v4 as uuid } from 'uuid';
+import './Form.css'
 
 const Form = (props) => {
-    let [input , setInput] = useState('');
 
-    function inputChangeHandler(e){
-        setInput(e.target.value);
+    let [input,setInput] = useState('');
+    let [isValid , setIsValid] = useState(true);
+
+    function inputChangeHandler(e){ 
+        setInput(e.target.value)
+        if(input.trim().length > 0){
+            setIsValid(true);
+        }
     }
 
-    function formSubmitHandler(e){
+    function formSubmitHandler(e){ 
         // Baar baar reload hone se rokega or submit hone se bhi
         e.preventDefault();
-
-        const newTodo = {
-            id : uuid(),
-            todo : input
+        if(input.trim().length === 0 ){
+            setIsValid(false);
+            return;
         }
 
+        const newTodo = {
+            id: props.todos.length,
+            todo: input,
+            checked:false
+        }
         props.addTodo(newTodo);
-        console.log(input);
+        // console.log(input);
         setInput('');
     }
+    
 
-
+    
   return (
-    <form onSubmit={formSubmitHandler} >
-        <input onChange={inputChangeHandler} type='text' placeholder='Enter your task' value={input} />
+    <form onSubmit={formSubmitHandler}>
+        <input style={{border: `${!isValid ? '5px solid blue' : '' } `}} onChange={inputChangeHandler} className='divv' type="text" name="" id="" placeholder='Add your todos' value={input} />
     </form>
   )
 }
