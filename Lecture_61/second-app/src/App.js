@@ -1,9 +1,13 @@
 import React from 'react'
-import TodoApp from './Components/TodoApp'
+import TodoApp from './Component/TodoApp'
+import './App.css'
+
 
 const App = () => {
   return (
-    <TodoApp />
+    <div>
+      <TodoApp/>
+    </div>
   )
 }
 

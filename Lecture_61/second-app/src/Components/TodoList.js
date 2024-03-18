@@ -1,15 +1,16 @@
 import React from 'react'
-import Todo from './Todo'
+import Todo from './Todo';
+import "./TodoList.css"
 
-const TodoList = (props) => {
+const TodoList = ({todos,deleteTodo,checkTodo }) => {
 
-    const allTodos = props.todos.map((item,index)=>{
-        return <Todo key={index} id={item.id} todo={item.todo} index={index} deleteTodo={props.deleteTodo}/>
-    })
+  const allTodos = todos.map((item,index)=>{
+      return <Todo key={index} todoItem={item} deleteTodo={deleteTodo} checkTodo={checkTodo}  />
+  })
 
   return (
     <section>
-        <ul>
+        <ul className='todo-list'>
             {allTodos}
         </ul>
     </section>
