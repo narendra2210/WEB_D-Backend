@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const seedDB = require('./seed');
+const cors = require('cors');
+const quoteRoutes = require('./apis/quoteRoute');
 
 mongoose.connect('mongodb://127.0.0.1:27017/Quote')
 .then(()=>{
@@ -12,7 +14,12 @@ mongoose.connect('mongodb://127.0.0.1:27017/Quote')
 })
 
 
-app.use(express.urlencoded({extended : true}));
+app.use(express.urlencoded({extended : true})); //forn data
+app.use(express.json()); // json data
+// cors mddleware
+app.use(cors({origin:['http://localhost:3000']}));
+
+app.use(quoteRoutes);
 
 app.get('/hello' , (req,res)=>{
     res.status(200).json({msg : "hello from monu don"});
