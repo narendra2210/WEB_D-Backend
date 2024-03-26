@@ -39,4 +39,4 @@ const AllQuotes = () => {
   )
 }
 
-export default AllQuote
+export default AllQuotes
