@@ -10,6 +10,16 @@ const router = express.Router() //mini instance or Mini Server
 //server side validation middleware
 const {validateProduct , isProductAuthor , isLoggedIn, isSeller} = require('../middleware')
 
+router.get('/' , async(req,res)=>{
+
+    try{
+        let products = await Product.find({});
+        res.render('products/index' , {products});
+    }
+    catch(e){
+        res.status(500).render('error' , {err:e.message});
+    }
+})
 
 // As it is dealing with DB so it has to use Async await
 // To shw all the products

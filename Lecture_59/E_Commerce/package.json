@@ -29,5 +29,8 @@
     "passport-local-mongoose": "^8.0.0",
     "request": "^2.88.2",
     "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.2"
   }
 }
